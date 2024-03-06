@@ -38,6 +38,7 @@ class DBStorage:
             obj_list.extend(self.__session.query(City).all())
             obj_list.extend(self.__session.query(User).all())
             obj_list.extend(self.__session.query(Place).all())
+            obj_list.extend(self.__session.query(Review).all())
         else:
             obj_list = self.__session.query(cls).all()
 
