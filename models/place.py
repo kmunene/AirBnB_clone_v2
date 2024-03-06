@@ -8,6 +8,18 @@ from os import getenv
 import models
 
 
+place_amenity = Table ('place_amenity', Base.metadata,
+                        Column('place_id', String(60),
+                                ForeignKey('places.id'),
+                                primary_key=True,
+                                nullable=False),
+                        Column('amenity_id', String(60),
+                                ForeignKey('amenities.id'),
+                                primary_key=True,
+                                nullable=False)   
+)
+
+
 class Place(BaseModel, Base):
     """ A place to stay """
     __tablename__ = "places"
@@ -23,6 +35,7 @@ class Place(BaseModel, Base):
     longitude = Column(Float)
     amenity_ids = []
     reviews = relationship("Review", backref="place", cascade="all, delete, delete-orphan")
+    amenities= relationship('Amenity', back_populates='place_amenities', secondary='place_amenity', viewonly=False)
 
     @property
     def reviews(self):
@@ -33,3 +46,20 @@ class Place(BaseModel, Base):
             if review.place_id == self.id:
                     reviews_list.append(review)
         return reviews_list
+    
+    @property
+    def amenities(self):
+        """
+        returns the list of Amenity instances based on the
+        attribute amenity_ids that contains all Amenity.id
+        linked to the Place
+        """
+        return self.amenity_ids
+    
+    @amenities.setter
+    def amenities(self, obj=None):
+        split_objects = obj.split()
+        class_name = split_objects[0][1:-1]
+        if class_name == 'Amenity' and obj.id not in self.amenity_ids:
+            self.amenity_ids.append(obj.id)
+
