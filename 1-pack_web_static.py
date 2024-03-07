@@ -6,6 +6,7 @@ from the contents of the web_static
 from fabric.api import local
 from datetime import datetime
 
+
 def do_pack():
     """
     Generate a .tgz archive from the contents of the web_static folder.
@@ -14,7 +15,6 @@ def do_pack():
 
     time = datetime.now()
     str_time = time.strftime("%Y%m%d%H%M%S")
-
 
     archive = "web_static_{}.tgz".format(str_time)
     output = local("tar -cvzf versions/{} web_static".format(archive))
