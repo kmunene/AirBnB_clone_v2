@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-#setting up the server
+# Bash script for setting up the server
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
 
 folder1='/data/'
 folder2='/data/web_static/'
