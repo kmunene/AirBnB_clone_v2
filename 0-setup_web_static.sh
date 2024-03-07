@@ -36,6 +36,7 @@ create_directory "$folder3"
 create_directory "$folder4"
 create_directory "$folder5"
 
+sudo touch /data/web_static/releases/test/index.html
 #creating a fake html file
 echo "
 <html>
