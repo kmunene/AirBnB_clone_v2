@@ -68,3 +68,7 @@ class FileStorage:
                     del self.all()[key]
                     break
             self.save()
+
+    def close(self):
+        """calls reload method"""
+        self.reload()
