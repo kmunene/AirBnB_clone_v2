@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 """
 A script that start a Flask Web application
 """
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route("/", strict_slashes=False)
-def index():
+def hello():
     """web display"""
     return "Hello HBNB!"
 
